@@ -12,8 +12,6 @@ public class Platform : MonoBehaviour {
 		SpriteRenderer csprite = prefab.AddComponent<SpriteRenderer>();
 		csprite.sprite = sprite.sprite;
 
-		Debug.Log (sscale);
-
 		GameObject child;
 		int w = (int)Mathf.Round (sscale.x), h = (int)Mathf.Round (sscale.y);
 		for (int y = 0; y < h; y++) {
