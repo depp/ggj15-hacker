@@ -4,3 +4,4 @@
 *.mat eol=lf
 *.anim eol=lf
 *.controller eol=lf
+*.cs eol=lf
