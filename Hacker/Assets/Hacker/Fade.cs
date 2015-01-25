@@ -35,12 +35,12 @@ public class Fade : MonoBehaviour {
 			if (fadeIn) {
 				texture.enabled = false;
 				isActive = false;
+				target = null;
+				invoker = null;
 				return;
 			} else {
 				if (target != null)
 					target(invoker);
-				target = null;
-				invoker = null;
 				fadeIn = true;
 				targetTime += fadeTime;
 				dtime -= fadeTime;
