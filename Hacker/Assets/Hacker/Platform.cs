@@ -17,6 +17,7 @@ public class Platform : MonoBehaviour {
 		for (int y = 0; y < h; y++) {
 			for (int x = 0; x < w; x++) {
 				child = (GameObject) Instantiate (prefab);
+				child.transform.parent = transform;
 				child.transform.position = transform.position +
 					new Vector3(x * ssize.x,
 					            y * ssize.y,
