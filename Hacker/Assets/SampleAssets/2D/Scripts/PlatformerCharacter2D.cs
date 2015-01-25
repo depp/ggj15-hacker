@@ -38,7 +38,25 @@ namespace UnitySampleAssets._2D
         private void FixedUpdate()
 		{
 		    // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-		    grounded = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
+			Collider2D coll = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
+			if (coll != null) {
+				Transform t = coll.transform;
+				Bob bob = null;
+				while (t != null) {
+					bob = t.GetComponent<Bob>();
+					if (bob != null)
+						break;
+					t = t.parent;
+				}
+				if (bob != null) {
+					transform.parent = bob.transform;
+				} else {
+					transform.parent = null;
+				}
+			} else {
+				transform.parent = null;
+			}
+			grounded = coll;
 		    anim.SetBool("Ground", grounded);
 
 		    // Set the vertical animation
