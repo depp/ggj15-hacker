@@ -26,10 +26,6 @@ public class Teleporter : Interactive {
 		swirl.localRotation = Quaternion.AngleAxis (angle, Vector3.forward);
 	}
 
-	public void Interact(GameObject player) {
-
-	}
-
 	private void Execute(GameObject player) {
 		if (Target == null)
 			return;
@@ -40,7 +36,7 @@ public class Teleporter : Interactive {
 		player.transform.position = newPosition;
 	}
 
-	public override void Interact(Platformer2DUserControl player) {
+	protected override void Interact(Platformer2DUserControl player) {
 		Fade.RunAction (FadeColor, FadeTime, this.Execute, player.gameObject);
 	}
 }

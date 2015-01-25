@@ -16,7 +16,7 @@ public class Door : Interactive {
 		return !IsLocked || player.HasKey;
 	}
 
-	public override void Interact(Platformer2DUserControl player) {
+	protected override void Interact(Platformer2DUserControl player) {
 		Fade.RunAction(FadeColor, FadeTime, this.Execute, player.gameObject);
 	}
 }

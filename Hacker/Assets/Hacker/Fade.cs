@@ -31,32 +31,33 @@ public class Fade : MonoBehaviour {
 		if (!isActive)
 			return;
 		float dtime = Time.time - targetTime;
-		if (dtime > fadeTime) {
-			if (fadeIn) {
-				texture.enabled = false;
-				isActive = false;
-				target = null;
-				invoker = null;
-				return;
-			} else {
+		if (dtime < 0.0f) {
+			dtime = -dtime;
+		} else {
+			if (!fadeIn) {
 				if (target != null)
 					target(invoker);
 				fadeIn = true;
-				targetTime += fadeTime;
-				dtime -= fadeTime;
+				target = null;
+				invoker = null;
+			}
+			if (dtime >= fadeTime) {
+				texture.enabled = false;
+				isActive = false;
 			}
 		}
 		dtime /= fadeTime;
-		if (fadeIn)
-			dtime = 1.0f - dtime;
-		if (!(dtime >= 0.0f))
+		if (!(dtime >= 0.0f)) {
 			dtime = 0.0f;
+		} else if (!(dtime <= 1.0f)) {
+			dtime = 1.0f;
+		}
 		texture.color = new Color(
 			targetColor.r, targetColor.g, targetColor.b,
-			Mathf.Pow (dtime, FadePower));
+			Mathf.Pow (1.0f - dtime, FadePower));
 	}
 
-	public static void RunAction(Color color, float time, Action target, GameObject invoker) {
+	public static void RunAction(Color color, float time, Action target, GameObject invoker, float targetTime) {
 		GameObject obj = GameObject.Find ("Fade");
 		Fade f = obj != null ? obj.GetComponent<Fade>() : null;
 		if (f == null) {
@@ -67,10 +68,14 @@ public class Fade : MonoBehaviour {
 			f.target = target;
 			f.invoker = invoker;
 			f.targetColor = color;
-			f.targetTime = Time.time;
+			f.targetTime = targetTime;
 			f.fadeTime = time;
 			f.isActive = true;
 			f.fadeIn = false;
 		}
+	}
+
+	public static void RunAction(Color color, float time, Action target, GameObject invoker) {
+		RunAction (color, time, target, invoker, Time.time + time);
 	}
 }

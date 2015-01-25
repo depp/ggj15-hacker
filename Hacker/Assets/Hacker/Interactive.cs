@@ -7,13 +7,15 @@ public abstract class Interactive : MonoBehaviour {
 	[SerializeField] public float BobAmount = 0.3f;
 	[SerializeField] public Sprite ArrowSprite;
 	[SerializeField] public Sprite NoEntrySprite;
+	[SerializeField] public AudioClip AudioSucceed;
+	[SerializeField] public AudioClip AudioFail;
 	
 	private Transform arrowTransform;
 	private Vector2 startVector;
 	private SpriteRenderer sprite;
 	private bool isActive;
 	private bool isPermitted;
-	
+
 	public void Awake()
 	{
 		arrowTransform = transform.Find ("Arrow");
@@ -39,12 +41,9 @@ public abstract class Interactive : MonoBehaviour {
 			return;
 		isActive = true;
 		sprite.enabled = true;
-		if (IsPermitted (p)) {
-			p.InteractionObj = this;
-			sprite.sprite = ArrowSprite;
-		} else {
-			sprite.sprite = NoEntrySprite;
-		}
+		p.InteractionObj = this;
+		isPermitted = IsPermitted (p);
+		sprite.sprite = isPermitted ? ArrowSprite : NoEntrySprite;
 	}
 
 	void OnTriggerExit2D(Collider2D other)
@@ -71,5 +70,16 @@ public abstract class Interactive : MonoBehaviour {
 		return true;
 	}
 
-	public abstract void Interact(Platformer2DUserControl player);
+	protected abstract void Interact(Platformer2DUserControl player);
+
+	public void TryInteract(Platformer2DUserControl player)
+	{
+		AudioClip clip = isPermitted ? AudioSucceed : AudioFail;
+		if (clip != null) {
+			AudioSource.PlayClipAtPoint(clip, Vector3.zero);
+		}
+		if (isPermitted) {
+			Interact (player);
+		}
+	}
 }

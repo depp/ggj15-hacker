@@ -6,11 +6,16 @@ namespace UnitySampleAssets._2D
     {
 		[SerializeField] public float FadeTime = 0.5f;
 		[SerializeField] public Color FadeColor = Color.red;
+		[SerializeField] public AudioClip Fall;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.tag == "Player")
-				Fade.RunAction(FadeColor, FadeTime, this.Execute, other.gameObject);
+            if (other.tag == "Player") {
+				if (Fall != null) {
+					AudioSource.PlayClipAtPoint(Fall, Vector3.zero);
+				}
+				Fade.RunAction(FadeColor, Fall.length, this.Execute, other.gameObject);
+			}
         }
 
 		private void Execute(GameObject player)

@@ -12,6 +12,8 @@ namespace UnitySampleAssets._2D
 		private bool action;
 		public bool HasKey;
 		public Interactive InteractionObj;
+		public float lastInteract;
+		private const float InteractDelay = 0.75f;
 
 
         private void Awake()
@@ -37,7 +39,10 @@ namespace UnitySampleAssets._2D
             jump = false;
 			if (action) {
 				if (InteractionObj != null) {
-					InteractionObj.Interact(this);
+					if (Time.time > lastInteract + InteractDelay) {
+						lastInteract = Time.time;
+						InteractionObj.TryInteract(this);
+					}
 				}
 				action = false;
 			}
