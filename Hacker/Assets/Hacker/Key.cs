@@ -9,8 +9,9 @@ public class Key : MonoBehaviour {
 		if (p == null || p.HasKey)
 			return;
 		Destroy (GetComponent<Collider2D>());
-		transform.parent = other.gameObject.transform;
-		transform.localPosition = new Vector3(-0.5f, 0.5f, 0.0f);
+		Transform t = other.gameObject.transform;
+		transform.localPosition = t.position + new Vector3(-0.5f, 0.5f, 0.0f);
+		transform.parent = t;
 		p.HasKey = true;
 	}
 }
