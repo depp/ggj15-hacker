@@ -91,7 +91,7 @@ namespace UnitySampleAssets._2D
 			} else if (!jumpHeld && !grounded && rigidbody2D.velocity.y > 0) {
 				Vector2 v = rigidbody2D.velocity;
 				rigidbody2D.velocity = new Vector2(v.x, 0);
-				rigidbody2D.AddForce(new Vector2 (0f, jumpReleaseForce));
+				rigidbody2D.AddForce (new Vector2 (0f, jumpReleaseForce));
 			}
         }
 
