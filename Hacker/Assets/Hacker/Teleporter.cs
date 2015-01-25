@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnitySampleAssets._2D;
 
-public class Teleporter : MonoBehaviour {
+public class Teleporter : Interactive {
 	[SerializeField] public Transform Target;
 	[SerializeField] public float SwirlSpeed = 2.0f;
 	[SerializeField] public float FadeTime = 0.2f;
@@ -19,13 +20,14 @@ public class Teleporter : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
+		base.Update();
 		float angle = Time.time * SwirlSpeed * 360.0f;
 		swirl.localRotation = Quaternion.AngleAxis (angle, Vector3.forward);
 	}
 
 	public void Interact(GameObject player) {
-		Fade.RunAction (FadeColor, FadeTime, this.Execute, player);
+
 	}
 
 	private void Execute(GameObject player) {
@@ -36,5 +38,9 @@ public class Teleporter : MonoBehaviour {
 		if (box != null)
 			newPosition = Target.transform.TransformPoint(box.center);
 		player.transform.position = newPosition;
+	}
+
+	public override void Interact(Platformer2DUserControl player) {
+		Fade.RunAction (FadeColor, FadeTime, this.Execute, player.gameObject);
 	}
 }

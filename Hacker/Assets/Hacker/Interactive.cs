@@ -2,13 +2,17 @@ using UnityEngine;
 using System.Collections;
 using UnitySampleAssets._2D;
 
-public class Interactive : MonoBehaviour {
-	const float BobRate = 4.0f;
-	const float BobAmount = 0.3f;
+public abstract class Interactive : MonoBehaviour {
+	[SerializeField] public float BobRate = 4.0f;
+	[SerializeField] public float BobAmount = 0.3f;
+	[SerializeField] public Sprite ArrowSprite;
+	[SerializeField] public Sprite NoEntrySprite;
+	
 	private Transform arrowTransform;
 	private Vector2 startVector;
-	private SpriteRenderer arrowSprite;
+	private SpriteRenderer sprite;
 	private bool isActive;
+	private bool isPermitted;
 	
 	public void Awake()
 	{
@@ -18,12 +22,12 @@ public class Interactive : MonoBehaviour {
 			return;
 		}
 		startVector = arrowTransform.localPosition;
-		arrowSprite = arrowTransform.GetComponent<SpriteRenderer>();
-		if (arrowSprite == null) {
+		sprite = arrowTransform.GetComponent<SpriteRenderer>();
+		if (sprite == null) {
 			Debug.LogError ("Interactive has no sprite!");
 			return;
 		}
-		arrowSprite.enabled = false;
+		sprite.enabled = false;
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -34,8 +38,13 @@ public class Interactive : MonoBehaviour {
 		if (p == null)
 			return;
 		isActive = true;
-		arrowSprite.enabled = true;
-		p.InteractionObj = this;
+		sprite.enabled = true;
+		if (IsPermitted (p)) {
+			p.InteractionObj = this;
+			sprite.sprite = ArrowSprite;
+		} else {
+			sprite.sprite = NoEntrySprite;
+		}
 	}
 
 	void OnTriggerExit2D(Collider2D other)
@@ -46,15 +55,21 @@ public class Interactive : MonoBehaviour {
 		if (p == null)
 			return;
 		isActive = false;
-		arrowSprite.enabled = false;
+		sprite.enabled = false;
 		if (p.InteractionObj == this)
 			p.InteractionObj = null;
 	}
 
-	public void Update()
+	protected virtual void Update()
 	{
 		if (!isActive)
 			return;
 		arrowTransform.localPosition = startVector + new Vector2(0.0f, BobAmount * Mathf.Sin (BobRate * Time.time));
 	}
+
+	protected virtual bool IsPermitted(Platformer2DUserControl player) {
+		return true;
+	}
+
+	public abstract void Interact(Platformer2DUserControl player);
 }

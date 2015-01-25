@@ -37,7 +37,7 @@ namespace UnitySampleAssets._2D
             jump = false;
 			if (action) {
 				if (InteractionObj != null) {
-					InteractionObj.BroadcastMessage("Interact", gameObject);
+					InteractionObj.Interact(this);
 				}
 				action = false;
 			}
