@@ -13,9 +13,6 @@ namespace UnitySampleAssets._2D
 		[SerializeField] private float jumpReleaseLimit = 0.2f; // Minimum speed for jumpReleaseForce to be added.
 		[SerializeField] public float ShotSpeed = 20f;
 
-        [Range(0, 1)] [SerializeField] private float crouchSpeed = .36f;
-                                                     // Amount of maxSpeed applied to crouching movement. 1 = 100%
-
         [SerializeField] private bool airControl = false; // Whether or not a player can steer while jumping;
         [SerializeField] private LayerMask whatIsGround; // A mask determining what is ground to the character
 
@@ -68,27 +65,13 @@ namespace UnitySampleAssets._2D
 		}
 
 
-        public void Move(float move, bool crouch, bool jump, bool jumpHeld)
+        public void Move(float move, bool jump, bool jumpHeld)
         {
 
-
-            // If crouching, check to see if the character can stand up
-            if (!crouch && anim.GetBool("Crouch"))
-            {
-                // If the character has a ceiling preventing them from standing up, keep them crouching
-                if (Physics2D.OverlapCircle(ceilingCheck.position, ceilingRadius, whatIsGround))
-                    crouch = true;
-            }
-
-            // Set whether or not the character is crouching in the animator
-            anim.SetBool("Crouch", crouch);
 
             //only control the player if grounded or airControl is turned on
             if (grounded || airControl)
             {
-                // Reduce the speed if crouching by the crouchSpeed multiplier
-                move = (crouch ? move*crouchSpeed : move);
-
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
                 anim.SetFloat("Speed", Mathf.Abs(move));
 

@@ -37,7 +37,7 @@ namespace UnitySampleAssets._2D
             // Read the inputs.
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             // Pass all parameters to the character control script.
-			character.Move(h, false, jump, CrossPlatformInputManager.GetButton("Jump"));
+			character.Move(h, jump, CrossPlatformInputManager.GetButton("Jump"));
             jump = false;
 			character.Shoot(shoot);
 			shoot = false;
