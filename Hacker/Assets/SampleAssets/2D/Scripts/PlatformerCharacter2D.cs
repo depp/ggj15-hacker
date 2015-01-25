@@ -9,6 +9,8 @@ namespace UnitySampleAssets._2D
 
         [SerializeField] private float maxSpeed = 10f; // The fastest the player can travel in the x axis.
         [SerializeField] private float jumpForce = 400f; // Amount of force added when the player jumps.	
+		[SerializeField] private float jumpReleaseForce = 20f; // Amount of force added when jump is released.
+		//[SerializeField] private float jumpReleaseLimit = 0.2f; // Minimum speed for jumpReleaseForce to be added.
 
         [Range(0, 1)] [SerializeField] private float crouchSpeed = .36f;
                                                      // Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -34,17 +36,17 @@ namespace UnitySampleAssets._2D
 
 
         private void FixedUpdate()
-        {
-            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-            grounded = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
-            anim.SetBool("Ground", grounded);
+		{
+		    // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+		    grounded = Physics2D.OverlapCircle(groundCheck.position, groundedRadius, whatIsGround);
+		    anim.SetBool("Ground", grounded);
 
-            // Set the vertical animation
-            anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
-        }
+		    // Set the vertical animation
+		    anim.SetFloat("vSpeed", rigidbody2D.velocity.y);
+		}
 
 
-        public void Move(float move, bool crouch, bool jump)
+        public void Move(float move, bool crouch, bool jump, bool jumpHeld)
         {
 
 
@@ -81,13 +83,14 @@ namespace UnitySampleAssets._2D
                     Flip();
             }
             // If the player should jump...
-            if (grounded && jump && anim.GetBool("Ground"))
-            {
-                // Add a vertical force to the player.
-                grounded = false;
-                anim.SetBool("Ground", false);
-                rigidbody2D.AddForce(new Vector2(0f, jumpForce));
-            }
+            if (grounded && jump && anim.GetBool ("Ground")) {
+				// Add a vertical force to the player.
+				grounded = false;
+				anim.SetBool ("Ground", false);
+				rigidbody2D.AddForce (new Vector2 (0f, jumpForce));
+			} else if (!jumpHeld && !grounded && rigidbody2D.velocity.y > 0) {
+				rigidbody2D.AddForce (new Vector2 (0f, jumpReleaseForce));
+			}
         }
 
 
