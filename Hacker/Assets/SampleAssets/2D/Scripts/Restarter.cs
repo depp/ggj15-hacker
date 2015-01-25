@@ -7,7 +7,7 @@ namespace UnitySampleAssets._2D
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.tag == "Player")
-                Application.LoadLevel(Application.loadedLevelName);
+				Fade.GoToLevel(Color.red, Application.loadedLevelName);
         }
     }
 }
