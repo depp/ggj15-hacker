@@ -5,7 +5,6 @@ using UnitySampleAssets._2D;
 public class Door : Interactive {
 	[SerializeField] public bool IsLocked = true;
 	[SerializeField] public string Destination;
-	[SerializeField] public float FadeTime = 0.5f;
 	[SerializeField] public Color FadeColor = Color.black;
 
 	private void Execute(GameObject player) {
@@ -17,6 +16,6 @@ public class Door : Interactive {
 	}
 
 	protected override void Interact(Platformer2DUserControl player) {
-		Fade.RunAction(FadeColor, FadeTime, this.Execute, player.gameObject);
+		Fade.RunAction(FadeColor, AudioSucceed.length, this.Execute, player.gameObject);
 	}
 }

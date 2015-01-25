@@ -4,7 +4,6 @@ namespace UnitySampleAssets._2D
 {
     public class Restarter : MonoBehaviour
     {
-		[SerializeField] public float FadeTime = 0.5f;
 		[SerializeField] public Color FadeColor = Color.red;
 		[SerializeField] public AudioClip Fall;
 
