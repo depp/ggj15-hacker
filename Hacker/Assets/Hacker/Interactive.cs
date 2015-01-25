@@ -12,9 +12,9 @@ public class Interactive : MonoBehaviour {
 	
 	public void Awake()
 	{
-		arrowTransform = transform.GetChild (0);
+		arrowTransform = transform.Find ("Arrow");
 		if (arrowTransform == null) {
-			Debug.LogError ("Interactive has no child!");
+			Debug.LogError ("Interactive has no arrow!");
 			return;
 		}
 		startVector = arrowTransform.localPosition;

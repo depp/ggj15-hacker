@@ -5,10 +5,14 @@ public class Fade : MonoBehaviour {
 	[SerializeField] public float FadeTime = 0.5f;
 	[SerializeField] public float FadePower = 2.0f;
 
+	public delegate void Action(GameObject obj);
+
 	private GUITexture texture;
-	private string targetLevel;
+	private Action target;
+	private GameObject invoker;
 	private Color targetColor;
 	private float targetTime;
+	private float fadeTime;
 	private bool fadeIn;
 	private bool isActive;
 
@@ -17,6 +21,7 @@ public class Fade : MonoBehaviour {
 		texture = GetComponent<GUITexture>();
 		targetColor = Color.black;
 		targetTime = Time.time;
+		fadeTime = FadeTime;
 		isActive = true;
 		fadeIn = true;
 	}
@@ -26,15 +31,22 @@ public class Fade : MonoBehaviour {
 		if (!isActive)
 			return;
 		float dtime = Time.time - targetTime;
-		if (dtime > FadeTime) {
-			if (fadeIn)
+		if (dtime > fadeTime) {
+			if (fadeIn) {
 				texture.enabled = false;
-			isActive = false;
-			if (targetLevel != null)
-				Application.LoadLevel(targetLevel);
-			return;
+				isActive = false;
+				return;
+			} else {
+				if (target != null)
+					target(invoker);
+				target = null;
+				invoker = null;
+				fadeIn = true;
+				targetTime += fadeTime;
+				dtime -= fadeTime;
+			}
 		}
-		dtime /= FadeTime;
+		dtime /= fadeTime;
 		if (fadeIn)
 			dtime = 1.0f - dtime;
 		if (!(dtime >= 0.0f))
@@ -44,17 +56,19 @@ public class Fade : MonoBehaviour {
 			Mathf.Pow (dtime, FadePower));
 	}
 
-	public static void GoToLevel(Color color, string levelName) {
+	public static void RunAction(Color color, float time, Action target, GameObject invoker) {
 		GameObject obj = GameObject.Find ("Fade");
 		Fade f = obj != null ? obj.GetComponent<Fade>() : null;
 		if (f == null) {
-			Application.LoadLevel(Application.loadedLevelName);
+			target(invoker);
 			return;
-		} else if (f.targetLevel == null) {
+		} else if (f.target == null) {
 			f.texture.enabled = true;
-			f.targetLevel = levelName;
+			f.target = target;
+			f.invoker = invoker;
 			f.targetColor = color;
 			f.targetTime = Time.time;
+			f.fadeTime = time;
 			f.isActive = true;
 			f.fadeIn = false;
 		}
