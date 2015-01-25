@@ -9,6 +9,10 @@ namespace UnitySampleAssets._2D
     {
         private PlatformerCharacter2D character;
         private bool jump;
+		private bool action;
+		public bool HasKey;
+		public Interactive InteractionObj;
+		
 
         private void Awake()
         {
@@ -20,6 +24,8 @@ namespace UnitySampleAssets._2D
             if(!jump)
             // Read the jump input in Update so button presses aren't missed.
             jump = CrossPlatformInputManager.GetButtonDown("Jump");
+			if (!action)
+				action = CrossPlatformInputManager.GetButtonDown("Submit");
         }
 
         private void FixedUpdate()
@@ -30,6 +36,10 @@ namespace UnitySampleAssets._2D
             // Pass all parameters to the character control script.
             character.Move(h, crouch, jump);
             jump = false;
+			if (action) {
+
+				action = false;
+			}
         }
     }
 }
