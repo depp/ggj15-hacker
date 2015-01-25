@@ -11,6 +11,7 @@ namespace UnitySampleAssets._2D
         [SerializeField] private float jumpForce = 400f; // Amount of force added when the player jumps.	
 		[SerializeField] private float jumpReleaseForce = 20f; // Amount of force added when jump is released.
 		[SerializeField] private float jumpReleaseLimit = 0.2f; // Minimum speed for jumpReleaseForce to be added.
+		[SerializeField] public float ShotSpeed = 20f;
 
         [Range(0, 1)] [SerializeField] private float crouchSpeed = .36f;
                                                      // Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -24,6 +25,9 @@ namespace UnitySampleAssets._2D
         private Transform ceilingCheck; // A position marking where to check for ceilings
         private float ceilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
         private Animator anim; // Reference to the player's animator component.
+
+		public GameObject shotPrefab;
+
 
 
         private void Awake()
@@ -113,7 +117,18 @@ namespace UnitySampleAssets._2D
 			}
         }
 
-
+		public void Shoot(bool shoot)
+		{
+			if (shoot) {
+				GameObject shotClone;
+				shotClone = (Instantiate(shotPrefab,
+				                         transform.position,
+				                         transform.rotation) as GameObject);
+				Rigidbody2D body = shotClone.GetComponent<Rigidbody2D>();
+				body.velocity = new Vector2(ShotSpeed, 0f);
+			}
+		}
+	
         private void Flip()
         {
             // Switch the way the player is labelled as facing.
