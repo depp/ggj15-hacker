@@ -11,6 +11,7 @@ namespace UnitySampleAssets._2D
         private bool jump;
 		private bool action;
 		public bool HasKey;
+		public bool shoot;
 		public Interactive InteractionObj;
 
 
@@ -26,6 +27,7 @@ namespace UnitySampleAssets._2D
             jump = CrossPlatformInputManager.GetButtonDown("Jump");
 			if (!action)
 				action = CrossPlatformInputManager.GetAxis("Vertical") >= 0.5f;
+			shoot = CrossPlatformInputManager.GetButtonDown("Fire1");
         }
 
         private void FixedUpdate()
@@ -35,6 +37,8 @@ namespace UnitySampleAssets._2D
             // Pass all parameters to the character control script.
 			character.Move(h, false, jump, CrossPlatformInputManager.GetButton("Jump"));
             jump = false;
+			character.Shoot(shoot);
+			shoot = false;
 			if (action) {
 				if (InteractionObj != null) {
 					InteractionObj.Interact(this);

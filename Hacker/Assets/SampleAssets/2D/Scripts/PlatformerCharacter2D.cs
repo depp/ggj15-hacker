@@ -113,6 +113,14 @@ namespace UnitySampleAssets._2D
 			}
         }
 
+		public void Shoot(bool shoot)
+		{
+			if (shoot) {
+				GameObject shotClone;
+				//shotClone = Instantiate (
+				Debug.Log("SHOT FIRED");
+			}
+		}
 
         private void Flip()
         {
