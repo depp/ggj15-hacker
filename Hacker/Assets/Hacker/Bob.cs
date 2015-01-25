@@ -16,6 +16,6 @@ public class Bob : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float bob = Mathf.Sin ((Time.time / BobPeriod + BobPhase) * (2.0f * Mathf.PI));
-		transform.position = zeroPos + new Vector3(0.0f, bob * BobHeight, 0.0f);
+		transform.position = zeroPos + new Vector3(0.0f, (bob + 1.0f) * BobHeight * 0.5f, 0.0f);
 	}
 }
