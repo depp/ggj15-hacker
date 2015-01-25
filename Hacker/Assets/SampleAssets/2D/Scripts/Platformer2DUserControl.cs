@@ -12,7 +12,7 @@ namespace UnitySampleAssets._2D
 		private bool action;
 		public bool HasKey;
 		public Interactive InteractionObj;
-		
+
 
         private void Awake()
         {
@@ -25,7 +25,7 @@ namespace UnitySampleAssets._2D
             // Read the jump input in Update so button presses aren't missed.
             jump = CrossPlatformInputManager.GetButtonDown("Jump");
 			if (!action)
-				action = CrossPlatformInputManager.GetButtonDown("Submit");
+				action = CrossPlatformInputManager.GetAxis("Vertical") >= 0.5f;
         }
 
         private void FixedUpdate()
@@ -36,7 +36,9 @@ namespace UnitySampleAssets._2D
 			character.Move(h, false, jump, CrossPlatformInputManager.GetButton("Jump"));
             jump = false;
 			if (action) {
-
+				if (InteractionObj != null) {
+					InteractionObj.BroadcastMessage("Interact", gameObject);
+				}
 				action = false;
 			}
         }
