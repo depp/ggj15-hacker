@@ -15,7 +15,7 @@ public class Bob : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		zeroPos = transform.position;
+		zeroPos = transform.localPosition;
 	}
 	
 	// Update is called once per frame
@@ -29,6 +29,6 @@ public class Bob : MonoBehaviour {
 		case Direction.Up:    direction = new Vector3( 0.0f, +1.0f, 0.0f); break;
 		case Direction.Down:  direction = new Vector3( 0.0f, -1.0f, 0.0f); break;
 		}
-		transform.position = zeroPos + distance * direction;
+		transform.localPosition = zeroPos + distance * direction;
 	}
 }
