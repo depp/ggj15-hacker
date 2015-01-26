@@ -33,10 +33,10 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 1024
   textureSettings:
-    filterMode: -1
+    filterMode: 0
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -49,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -62,8 +62,8 @@ TextureImporter:
         y: 0
         width: 28
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .50000006, y: .61838001}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_1
       rect:
@@ -72,8 +72,8 @@ TextureImporter:
         y: 0
         width: 29
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .486249864, y: .605918944}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_2
       rect:
@@ -82,8 +82,8 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .649532795, y: .587227345}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_3
       rect:
@@ -92,8 +92,8 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .66199398, y: .574766278}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_4
       rect:
@@ -102,8 +102,8 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .637071609, y: .568535805}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_5
       rect:
@@ -112,8 +112,8 @@ TextureImporter:
         y: 0
         width: 31
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .641493261, y: .574766278}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_6
       rect:
@@ -122,8 +122,8 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .56230545, y: .593457878}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_7
       rect:
@@ -132,8 +132,8 @@ TextureImporter:
         y: 0
         width: 25
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .739252925, y: .574766278}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_8
       rect:
@@ -142,8 +142,8 @@ TextureImporter:
         y: 0
         width: 31
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .590041637, y: .580996811}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_9
       rect:
@@ -152,8 +152,8 @@ TextureImporter:
         y: 0
         width: 30
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .579751611, y: .612149477}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_10
       rect:
@@ -162,8 +162,8 @@ TextureImporter:
         y: 0
         width: 32
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .56230545, y: .599688411}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Cyborg Girl Walk_11
       rect:
@@ -172,8 +172,8 @@ TextureImporter:
         y: 0
         width: 30
         height: 64
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .566459119, y: .587227345}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
