@@ -1,3 +1,5 @@
-# Hacker Game
+# Byte Runner
 
-This is a hacker game for Global Game jam 2015.
+This is a hacker-themed platforming game for Global Game Jam 2015.
+
+Website: https://www.moria.us/games/byte-runner/ (with downloads)
